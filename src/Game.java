@@ -1,13 +1,17 @@
-import java.awt.*;
+import java.awt.Canvas;
+import java.awt.Graphics;
+import java.awt.Color;
 import java.awt.image.BufferStrategy;
 
 public class Game extends Canvas implements Runnable {
-    private  static final long serialVersionUID = 1L;
-    private  boolean isRunning = false;
-    private  Thread thread;
-    private Handler handler;
 
-    public  Game() {
+    private static final long serialVersionUID = 1L;
+
+    private boolean isRunning = false;
+    private Thread thread;
+    private final Handler handler;
+
+    public Game() {
         new Window(1000, 563, "Portal Game", this);
         start();
 
@@ -21,9 +25,11 @@ public class Game extends Canvas implements Runnable {
         thread = new Thread(this);
         thread.start();
     }
+
     private void stop() {
         isRunning = false;
-        try{
+
+        try {
             thread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -61,13 +67,15 @@ public class Game extends Canvas implements Runnable {
         }
         stop();
     }
-    public void tick(){
+
+    public void tick() {
         handler.tick();
 
     }
+
     public void render() {
         BufferStrategy bs = this.getBufferStrategy();
-        if(bs == null) {
+        if (bs == null) {
             this.createBufferStrategy(3);
             return;
         }
@@ -87,4 +95,5 @@ public class Game extends Canvas implements Runnable {
     public static void main(String[] args) {
         new Game();
     }
+
 }

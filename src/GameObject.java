@@ -1,4 +1,4 @@
-import java.awt.*;
+import java.awt.Graphics;
 import java.awt.Rectangle;
 
 public abstract class GameObject {
@@ -45,4 +45,5 @@ public abstract class GameObject {
     public void setVelY(float velY) {
         this.velY = velY;
     }
+
 }

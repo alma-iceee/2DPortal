@@ -1,7 +1,8 @@
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+import java.awt.Dimension;
 
 public class Window {
+
     public Window(int width, int height, String title, Game game) {
 
         JFrame frame = new JFrame(title);
@@ -16,4 +17,5 @@ public class Window {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
+
 }
