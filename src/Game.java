@@ -5,10 +5,15 @@ public class Game extends Canvas implements Runnable {
     private  static final long serialVersionUID = 1L;
     private  boolean isRunning = false;
     private  Thread thread;
+    private Handler handler;
 
     public  Game() {
         new Window(1000, 563, "Portal Game", this);
         start();
+
+        handler = new Handler();
+        handler.addObject(new Box(100, 100));
+        handler.addObject(new Box(200, 100));
     }
 
     private void start() {
@@ -56,8 +61,11 @@ public class Game extends Canvas implements Runnable {
         }
         stop();
     }
+    public void tick(){
+        handler.tick();
 
-    public void tick() {
+    }
+    public void render() {
         BufferStrategy bs = this.getBufferStrategy();
         if(bs == null) {
             this.createBufferStrategy(3);
@@ -66,16 +74,14 @@ public class Game extends Canvas implements Runnable {
         Graphics g = bs.getDrawGraphics();
         ////////////////////////////////////
 
-        g.setColor(Color.cyan);
+        g.setColor(Color.black);
         g.fillRect(0, 0, 1000, 563);
+
+        handler.render(g);
 
         ////////////////////////////////////
         g.dispose();
         bs.show();
-    }
-
-    public void  render() {
-
     }
 
     public static void main(String[] args) {
